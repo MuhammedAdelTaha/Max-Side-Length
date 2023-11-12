@@ -96,11 +96,14 @@ public class MaxSideLength {
         //And update the min accordingly
         long min = dMin;
         for(int i = 0; i < strip.size() - 1; i++){
+            int j = 0;
             Point p0 = strip.get(i);
-            Point p1 = strip.get(i + 1);
-            long xDifference = Math.abs(p0.x - p1.x);
-            long yDifference = Math.abs(p0.y - p1.y);
-            min = Math.min(min, Math.max(xDifference, yDifference));
+            while (++j <= 7 && ((i + j) < strip.size())) {
+                Point pj = strip.get(i + j);
+                long xDifference = Math.abs(p0.x - pj.x);
+                long yDifference = Math.abs(p0.y - pj.y);
+                min = Math.min(min, Math.max(xDifference, yDifference));
+            }
         }
         return min;
     }
